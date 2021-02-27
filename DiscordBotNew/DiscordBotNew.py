@@ -17,12 +17,14 @@ async def helpp(ctx):
     await ctx.send("Commands: getYoutubeURL")
 
 @client.command()
-async def getYoutubeURL(ctx):
-    link = checkForYoutube("test")
-    if link is "None":
+async def getYoutubeURL(ctx, url):
+    link = checkForYoutube(url)
+    if link is 0:
         await ctx.send("That is not a Youtube link")
     else:
-        await ctx.send(link)
+        youtubeFile = open(config.YOUTUBETXTFILE, "a")
+        youtubeFile.writelines(link + "\n")
+        youtubeFile.close
 
 
 client.run(config.TOKEN)
